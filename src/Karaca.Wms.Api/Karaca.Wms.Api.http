@@ -1,0 +1,6 @@
+@Karaca.Wms.Api_HostAddress = http://localhost:5116
+
+GET {{Karaca.Wms.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
