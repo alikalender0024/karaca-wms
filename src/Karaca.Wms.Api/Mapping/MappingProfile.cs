@@ -9,6 +9,8 @@ namespace Karaca.Wms.Api.Mapping
         public MappingProfile()
         {
             CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Location, LocationDto>().ReverseMap();
+
         }
     }
 }
