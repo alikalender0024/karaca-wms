@@ -12,5 +12,6 @@ namespace Karaca.Wms.Api.Data
 
         public DbSet<Product> Products => Set<Product>();
         public DbSet<Location> Locations => Set<Location>();    
+        public DbSet<Inventory> Inventories => Set<Inventory>();
     }
 }

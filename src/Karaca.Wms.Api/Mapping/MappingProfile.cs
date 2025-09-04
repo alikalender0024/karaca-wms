@@ -10,6 +10,7 @@ namespace Karaca.Wms.Api.Mapping
         {
             CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<Location, LocationDto>().ReverseMap();
+            CreateMap<Inventory, InventoryDto>().ReverseMap();
 
         }
     }

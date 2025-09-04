@@ -30,6 +30,16 @@ namespace Karaca.Wms.Api.Data
                 context.Locations.AddRange(locations);
                 context.SaveChanges();
             }
+            if (!context.Inventories.Any())
+            {
+                var inventories = new Inventory[]
+                {
+                    new Inventory { ProductId = 1, LocationId = 1, Quantity = 10 },
+                    new Inventory { ProductId = 2, LocationId = 2, Quantity = 5 }
+                };
+                context.Inventories.AddRange(inventories);
+                context.SaveChanges();
+            }
             context.Products.AddRange(products);
             context.SaveChanges();
         }

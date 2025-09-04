@@ -1,6 +1,6 @@
 using Karaca.Wms.Api.Data;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;   
+using AutoMapper;
 using Karaca.Wms.Api.Mapping;
 using Serilog;
 
@@ -24,7 +24,16 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+// CORS policy ekle
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 
 // Swagger
@@ -33,6 +42,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
+// Veritabanını başlat ve seed işlemini yap
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -45,8 +56,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
- app.UseHttpsRedirection();
+// CORS middleware’i HTTPS redirection’dan önce ekle
+app.UseCors();
+app.UseHttpsRedirection();
 app.UseAuthorization();
 
 // Controller’ları ekle
